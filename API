@@ -1,0 +1,98 @@
+API DOCUMENTATION
+
+-placemap/api/places/load
+
+//PLACE
+	//#ADD#//
+		==syntax: placemap/api/places/add
+		placename*: This is the name of the place 
+		lat*: latitude of the place
+		lng*: longitude of the place
+		zoom: default zoom level (if not specified, will be X)
+
+	//#LIST#//
+		==syntax: placemap/api/places/list
+		returns json:{
+			placename: "Name",
+			placeid: placeid,
+			lat: lat,
+			lng: lng
+			}
+		for each place
+
+	//#LOAD#//
+		==syntax: placemap/api/places/load
+		placeid*: required id of the place
+
+		returns json:{
+			placename,
+			placeid,
+			lat,
+			lng,
+			zoom,
+		}
+
+
+//MARKERS
+	//#LOADALL#//
+		==syntax: placemap/api/marker/loadall
+		placeid*: required id of the place
+
+		returns json:{
+			placeid,
+			markerid,
+			lat,
+			lng
+		} for each marker
+
+	//#ADD#//
+		==syntax: placemap/api/marker/add
+		placeid*,
+		lat*,
+		lng*
+
+//AUDIT
+	//#LOADMARKER#//
+		==syntax: placemap/api/audit/loadmarker
+		markerid*
+
+		returns json:{
+			markerid,
+			placeid,
+			audit_desc
+			audit_title,
+			audit_questions{
+				audit_question:{
+					question_text,
+					question_type,
+					question_response
+				}
+			}
+			audit_score
+		}
+
+	//#LIST
+		==syntax: placemap/api/audit/list
+		return json:{
+			auditid,
+			audit_title
+		}
+
+	//#ADDAUDIT
+		==syntax: placemap/api/audit/addaudit
+		audit_title
+
+	//#ADDCATEGORY
+		==syntax: placemap/api/audit/addcategory
+		auditid*,
+		category_title*,
+		category_order*
+
+	//#ADDQUESTION
+		==syntax: placemap/api/audi/addquestion
+		auditid*
+		category_id*
+		question_type*
+		question_text*
+		question_order*
+

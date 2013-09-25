@@ -16,8 +16,20 @@ class Dbinit extends CI_Controller {
 		Header('Location: '.site_url("dbinit"));
 	}
 
+	public function createData(){
+		$this->dbinit_model->createData();
+		Header('Location: '.site_url("dbinit"));
+	}
+
 	public function deleteTables(){
 		$this->dbinit_model->deleteTables();
+		Header('Location: '.site_url("dbinit"));
+	}
+
+	public function refresh(){
+		$this->dbinit_model->deleteTables();
+		$this->dbinit_model->createTables();
+		$this->dbinit_model->createData();
 		Header('Location: '.site_url("dbinit"));
 	}
 

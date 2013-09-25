@@ -4,7 +4,7 @@ class Map extends CI_Controller {
 	
 	public function index()
 	{
-		$data['js'] = array('marker.js', 'map.js');
+		$data['js'] = array('placemap/marker.js','placemap/auditmarker.js', 'placemap/map.js','placemap/placemapapi.js', 'placemap/init.js');
 
 		$this->load->view('view_header', $data);
 		$this->load->view('view_map');

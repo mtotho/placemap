@@ -1,38 +1,41 @@
-//PlaceMarker: This is the marker object that is added to the screen when the user clicks 'add marker'. Additionally, it also serves to load the archived markers for a specific map
-function PlaceMarker(map,coords){
-	
-	var instance = this;
+function auditmarker(map, markerData){
+
+	console.log(markerData);
+	//this.place=place;
+	this.placeid = markerData.fk_placeid;
 	this.markerId;
-	this.coords=coords;
+	this.coords= new google.maps.LatLng(markerData.fld_lat, markerData.fld_lng);;
 	this.map=map;
 	this.marker;
 	this.options;
 	this.icon; //The icon that is used
 	this.icons = {
 			green_google: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-			blue_google: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-			green: base_url+ 'public/images/marker_green.png',
-			yellow_green: base_url+ 'public/images/marker_yellow-green.png',
-			yellow_red: base_url+ 'public/images/marker_yellow-red.png',
-			red: base_url + 'public/images/marker_red.png'
+			blue_google: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+			//green: base_url+ 'public/images/marker_green.png',
+			//yellow_green: base_url+ 'public/images/marker_yellow-green.png',
+			//yellow_red: base_url+ 'public/images/marker_yellow-red.png',
+			//red: base_url + 'public/images/marker_red.png'
 	};
 	
+	var instance = this;
+
 	//setCoords(): Set coords 
 	this.setCoords = function(coords)
 	{
 		this.coords = coords;
-	}
+	};
 	
 	//setIcon(): Sets the icon
 	this.setIcon = function(icon)
 	{
 		this.icon=icon;
-	}
+	};
 	
 	this.setMarkerId = function(id)
 	{
 		this.markerId = id;
-	}
+	};
 	
 	//bind(): Initiate action listeners
 	this.bind = function(){
@@ -40,19 +43,24 @@ function PlaceMarker(map,coords){
 		//Click():
 		google.maps.event.addListener(this.marker, 'click', function(event)
 		{
-			
+			if(window.dbgMethodCalls)
+				console.log(place.fld_placename + " auditmarker click event()");
+
+			//clear the markers from the place map
+			//window.map.clearPlaceMarkers();
+
+			//Load the place on the map
+			//window.map.loadPlace(place);
 
 		});
-		
+
 		//dblClick():
 		google.maps.event.addListener(this.marker, 'dblclick', function(event)
 		{
-			
+
+
 		});	
-		
-		
-		
-	}
+	};//end bind()
 	
 	//place(): this method places the marker on the map 
 	this.place = function()
@@ -60,7 +68,7 @@ function PlaceMarker(map,coords){
 				
 		this.options= {
 			draggable:false,
-			map: placemap.map,
+			map: this.map,
 			position: this.coords
 		};
 		
@@ -76,6 +84,5 @@ function PlaceMarker(map,coords){
 			this.marker.setIcon(this.icon);
 		}
 	
-	};
-	
+	};//end place()
 }

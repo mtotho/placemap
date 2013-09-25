@@ -2,14 +2,16 @@
 
 class Markers_model extends CI_Model {
 
-	function add($placeid, $lat, $lng){
-		$query = "insert into tbl_marker values('', ".$placeid.", ".$lat.", ".$lng.")";
+	function add($placeid, $email, $lat, $lng){
+		$query = "insert into tbl_marker values('', ".$placeid.", '".$email."', ".$lat.", ".$lng.")";
 		$this->db->query($query);
 	}
 
 	//load(): load all auditmarkers for the place
 	function load($placeid){
-		$query = "select * from tbl_marker where fk_placeid=".$placeid;
+		$query = "select * from tbl_marker marker where fk_placeid=".$placeid."";
+				//  inner join tbl_audit_question quest on marker.fk_auditquestionid
+		
 		$result = $this->db->query($query);
 
 		return $result->result();

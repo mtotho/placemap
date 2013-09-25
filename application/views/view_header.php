@@ -50,3 +50,4 @@
 		
 			
 			<div id="content">
+			<input id="session_email" type="hidden" value="<?php echo $this->session->userdata('email') ?>" />

@@ -1,13 +1,15 @@
 //PlaceMarker: This is the marker object that is added to the screen when the user clicks 'add marker'. Additionally, it also serves to load the archived markers for a specific map
 function PlaceMarker(map,place){
-		
-	this.place=place;
+
+	this.placedata=place;
+	this.infowindow = null;
 	this.markerId;
 	this.coords= new google.maps.LatLng(place.fld_lat, place.fld_lng);;
 	this.map=map;
 	this.marker;
 	this.options;
 	this.icon; //The icon that is used
+	instance = this;
 	this.icons = {
 			green_google: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
 			blue_google: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
@@ -54,9 +56,34 @@ function PlaceMarker(map,place){
 		});
 
 		//dblClick():
-		google.maps.event.addListener(this.marker, 'dblclick', function(event)
+		google.maps.event.addListener(this.marker, 'mouseover', function(event)
 		{
 
+			//console.log(place.fld_placename);
+			var content = "<div class=\"infowindow\">" + place.fld_placename + "</div>";
+
+			//only open new one if there isn't already one
+			if(instance.infowindow==null){
+
+				instance.infowindow = new google.maps.InfoWindow({
+      				content: content
+  				});
+
+				instance.infowindow.open(window.map.map, instance.marker);
+			}
+			
+
+			
+			
+		});	
+
+		google.maps.event.addListener(this.marker, 'mouseout', function(event)
+		{
+			//setTimeout(function () {
+				if(instance.infowindow!=null)
+					instance.infowindow.close();
+				instance.infowindow = null;	
+			 //}, 2000);
 
 		});	
 	};//end bind()

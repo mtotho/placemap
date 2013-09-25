@@ -2,8 +2,8 @@
 
 class Places_model extends CI_Model {
 
-	function add($placename, $lat, $lng, $zoom){
-		$query = "insert into tbl_place values('','".$placename."','".$lat."','".$lng."','".$zoom."')";
+	function add($placename, $placedesc, $lat, $lng, $zoom, $email){
+		$query = "insert into tbl_place values('','".$placename."', '".$placedesc."','".$lat."','".$lng."','".$zoom."', '".$email."')";
 		$this->db->query($query);
 	}//end add
 
@@ -12,6 +12,13 @@ class Places_model extends CI_Model {
 		$query = $this->db->query($query);
 
 		return $query->result();
+	}
+
+	function getById($placeid){
+		$query = "select * from tbl_place where pk_placeid='".$placeid."'";
+		$query = $this->db->query($query);
+
+		return $query->row();
 	}
 
 }

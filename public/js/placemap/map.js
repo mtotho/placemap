@@ -44,8 +44,9 @@ function googlemap(){
 		if(window.dbgMethodCalls)
 			console.log("map.resetMap()");
 
-		//clear auditmarkers
+		//clear auditmarkers and placemarkers
 		this.clearAuditMarkers();
+		this.clearPlaceMarkers();
 
 		this.place = null;
 
@@ -76,7 +77,6 @@ function googlemap(){
 
 		places = window.api.places.list();
 
-		console.log(places);
 
 		for(i=0;i<places.length; i++){
 			place = places[i];
@@ -96,6 +96,11 @@ function googlemap(){
 			console.log("map.loadPlace()");
 		
 		this.place = place;
+
+		location.hash = this.place.pk_placeid;
+
+		//clear any existing auditmarkers
+		this.clearAuditMarkers();
 		
 		var center = new google.maps.LatLng(place.fld_lat, place.fld_lng);
 
@@ -115,6 +120,7 @@ function googlemap(){
 
 		//load markers
 		this.loadAuditMarkers(this.place.pk_placeid);
+
 	}
 
 	//loadAuditMarkers(): load the markers for a particular place
@@ -132,7 +138,7 @@ function googlemap(){
 
 			//auditmarker = null;
 			this.auditmarkers[i] = new auditmarker(this.map, markerData);
-			this.auditmarkers[i].setIcon(placemarker.icons.green_google);
+			this.auditmarkers[i].setIcon(this.auditmarkers[i].icons.green_google);
 			this.auditmarkers[i].place();
 
 		}//end for
@@ -160,6 +166,7 @@ function googlemap(){
 
 		//loop through each marker and set the map to null
 		for(i=0; i<this.auditmarkers.length; i++){
+			console.log("Clearing marker # " + this.auditmarkers[i].markerid);
 			this.auditmarkers[i].marker.setMap(null);
 		}
 		

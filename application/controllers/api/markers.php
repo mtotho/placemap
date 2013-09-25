@@ -8,8 +8,9 @@ class Markers extends CI_Controller {
 		$placeid = $this->input->post('placeid');
 		$lat = $this->input->post("lat");
 		$lng = $this->input->post("lng");
+		$email =$this->session->userdata('email');//= $this->input->post("email");
 
-		$this->markers_model->add($placeid, $lat, $lng);
+		$this->markers_model->add($placeid, $email, $lat, $lng);
 	}
 
 	public function load(){
@@ -17,6 +18,10 @@ class Markers extends CI_Controller {
 		$markers = $this->markers_model->load($placeid);
 		//print_r($_POST);
 		echo json_encode($markers);
+	}
+
+	public function test(){
+		print_r($this->audit_model->getResponses(2));
 	}
 }
 

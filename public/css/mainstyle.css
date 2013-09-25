@@ -144,3 +144,8 @@ nav ul li a{
 	margin:0 1em 1em 0;
 		border: 1px solid #E0E0E0;
 }
+
+.infowindow{
+	height:50px;
+	width:100px;
+}

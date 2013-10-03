@@ -18,6 +18,23 @@ function places(){
 		});	
 	}//end add function
 
+	//places.delete(): add place to db
+	this.delete = function(id){
+		if(window.dbgMethodCalls)
+			console.log("api.places.delete()");
+
+		$.ajax({
+			type: 'post',
+			url: window.site_url + "api/places/delete",
+			data:{"placeid":id},
+			success: function(data){
+				//console.log(data);
+				if(data==1)
+					return 1;
+			}
+		});	
+	}//end add function
+
 	//places.list(): list places from db 
 	this.list = function(){
 		if(window.dbgMethodCalls)
@@ -135,6 +152,26 @@ function audit(){
 					return 1;
 			}
 		});			
+	}//end add audit.add
+
+	//audit->getResponseByMarkerid
+	this.getResponseByMarkerid = function(data){
+		if(window.dbgMethodCalls)
+			console.log("api.audit.getResponsesByMarkerid()");
+
+		var returndata;
+		
+		$.ajax({
+			type: 'post',
+			url: window.site_url + "api/audit/getResponseByMarkerid",
+			data:data,
+			async:false,
+			complete: function(data){
+				returndata= jQuery.parseJSON(data.responseText);
+			}
+		});		
+
+		return returndata;	
 	}
 
 }//end audit class

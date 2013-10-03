@@ -7,6 +7,12 @@ class Places_model extends CI_Model {
 		$this->db->query($query);
 	}//end add
 
+	function delete($placeid){
+		$query = "delete from tbl_place where pk_placeid=".$placeid;
+		$query = $this->db->query($query);
+		
+	}
+
 	function listplaces(){
 		$query = "select * from tbl_place";
 		$query = $this->db->query($query);

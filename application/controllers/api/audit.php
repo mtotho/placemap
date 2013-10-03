@@ -20,6 +20,14 @@ class Audit extends CI_Controller {
 
 	}
 
+	public function getResponseByMarkerid(){
+		$markerid = $this->input->post('markerid');
+		$responses = $this->audit_model->getResponses($markerid);
+		$responses = json_encode($responses);
+
+		echo $responses;
+	}
+
 }
 
 /* End of file audit.php */

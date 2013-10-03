@@ -1,5 +1,5 @@
 a, p, h1, h2, h3, h4{
-	font-family: helvetica;
+	font-family:  	;
 }
 p{
 	text-align:justify;
@@ -38,7 +38,8 @@ ul li{
 #container{
 	width:80%;
 	margin:0.5em auto 0 auto;
-	box-shadow: 1px 1px 5px #666666;
+	border-right:1px solid black;
+	/* box-shadow: 1px 1px 5px #666666; */
 }
 
 header{
@@ -61,6 +62,7 @@ header h2{
 #map_canvas{
 	width:700px;
 	height:700px;
+
 }
 
 /*navigation*/

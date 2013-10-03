@@ -11,9 +11,9 @@
 <div id="modalAddPlace" title="Add Place">
 	<form>
   <fieldset>
-    <label for="name">Place Name</label>
+    <label for="placename">Place Name</label>
     <input type="text" name="placename" id="placename" class="text ui-widget-content ui-corner-all" />
-    <label for="email">Place Desc</label>
+    <label for="placedesc">Place Desc</label>
     <input type="text" name="placedesc" id="placedesc" value="" class="text ui-widget-content ui-corner-all" />
    
   </fieldset>

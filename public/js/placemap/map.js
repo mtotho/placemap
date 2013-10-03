@@ -5,6 +5,8 @@ function googlemap(){
 	this.placemarkers = new Array();
 	this.auditmarkers = new Array();
 	this.place = null;
+	this.default_mapOptions;
+	this.place_mapOptions;
 	//this.api=api;
 
 	this.initialize=function(){
@@ -16,17 +18,17 @@ function googlemap(){
 		var center = new google.maps.LatLng(39.62482981110736, -98.67670524215697);
 
 		//Initial Map Options
-		var mapOptions = {
+		this.default_mapOptions = {
 		      center:center,
 		      zoom: 4,
-		      mapTypeId: google.maps.MapTypeId.HYBRID,
+		      mapTypeId: google.maps.MapTypeId.ROADMAP,
 		      draggable:true,
 		      zoomControl: true,
 		      disableDoubleClickZoom:false   
 		};
 
 		//The map variable
-		this.map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+		this.map = new google.maps.Map(document.getElementById("map_canvas"), this.default_mapOptions);
 
 
 		//Create draggable map marker that will be used for various purposes
@@ -51,20 +53,21 @@ function googlemap(){
 		this.place = null;
 
 		//The center of the map coords
-		var center = new google.maps.LatLng(39.62482981110736, -98.67670524215697);
+		//var center = new google.maps.LatLng(39.62482981110736, -98.67670524215697);
 
+		//this.mapOptions
 		//Initial Map Options
-		var mapOptions = {
-		      center:center,
-		      zoom: 4,
-		      mapTypeId: google.maps.MapTypeId.HYBRID,
-		      draggable:true,
-		      zoomControl: true,
-		      disableDoubleClickZoom:false   
-		};
-
-		this.map.setOptions(mapOptions);
-		this.draggablemarker.setPosition(center);
+	//	var mapOptions = {
+	//	      center:center,
+	//	      zoom: 4,
+	//	      mapTypeId: google.maps.MapTypeId.ROADMAP,
+	//	      draggable:true,
+	//	      zoomControl: true,
+	//	      disableDoubleClickZoom:false   
+		//};
+		this.default_mapOptions.mapTypeId=google.maps.MapTypeId.ROADMAP;
+		this.map.setOptions(this.default_mapOptions);
+		this.draggablemarker.setPosition(this.default_mapOptions.center);
 		//Load place markers
 		this.loadPlaceMarkers();
 
@@ -93,8 +96,8 @@ function googlemap(){
 	//loadPlace(): centers the map on a place
 	this.loadPlace = function(place){
 		if(window.dbgMethodCalls)
-			console.log("map.loadPlace()");
-		
+			console.log("map.loadPlace(" + place.fld_placename + ")");
+		//console.log(place);
 		this.place = place;
 
 		location.hash = this.place.pk_placeid;
@@ -105,16 +108,16 @@ function googlemap(){
 		var center = new google.maps.LatLng(place.fld_lat, place.fld_lng);
 
 		//new map options
-		var mapOptions = {
+		this.place_mapOptions = {
 		      center:center,
 		      zoom: parseInt(place.fld_zoom),
-		      mapTypeId: google.maps.MapTypeId.HYBRID,
+		      mapTypeId: google.maps.MapTypeId.ROADMAP,
 		      draggable:true,
 		      zoomControl: true,
 		      disableDoubleClickZoom:false   
 		};
 
-		this.map.setOptions(mapOptions);
+		this.map.setOptions(this.place_mapOptions);
 
 		this.draggablemarker.setPosition(center);
 
@@ -126,7 +129,7 @@ function googlemap(){
 	//loadAuditMarkers(): load the markers for a particular place
 	this.loadAuditMarkers = function(placeid){
 		if(window.dbgMethodCalls)
-			console.log("map.loadAutiMarkers()");
+			console.log("map.loadAutiMarkers(placeid=" + placeid+ ")");
 
 		var markers = window.api.markers.load(placeid);
 		//console.log(markers);

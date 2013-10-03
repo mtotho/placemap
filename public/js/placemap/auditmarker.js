@@ -1,9 +1,13 @@
 function auditmarker(map, markerData){
 	instance = this;
-	console.log(markerData);
 	//this.place=place;
+	console.log(markerData);
+	this.place = window.map.place;
 	this.placeid = markerData.fk_placeid;
 	this.markerid = markerData.pk_markerid;
+	this.audit = window.api.audit.getResponseByMarkerid({markerid: this.markerid});
+	
+
 	this.coords= new google.maps.LatLng(markerData.fld_lat, markerData.fld_lng);;
 	this.map=map;
 	this.marker;
@@ -44,7 +48,9 @@ function auditmarker(map, markerData){
 		google.maps.event.addListener(this.marker, 'click', function(event)
 		{
 			if(window.dbgMethodCalls)
-				console.log(place.fld_placename + " auditmarker id# " + instance.markerid + " click event()");
+				console.log(window.map.place.fld_placename + " auditmarker id# " + instance.markerid + " click event()");
+
+			console.log(instance.audit);
 
 			//clear the markers from the place map
 			//window.map.clearPlaceMarkers();

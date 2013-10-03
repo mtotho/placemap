@@ -69,6 +69,7 @@ class Dbinit_model extends CI_Model {
 			'tbl_audit_response'=>"CREATE TABLE IF NOT exists tbl_audit_response(
 					pk_auditresponseid  int auto_increment not null,
 					fk_markerid int not null,
+					fk_placeid int not null,
 					fk_auditquestionid varchar(50) not null,
 					fk_questiontypeid int not null,
 					fld_numericresponse int,
@@ -123,9 +124,9 @@ class Dbinit_model extends CI_Model {
 		$this->db->query("insert into tbl_audit_subquestion values('', '2', 'Routes are safe and convenient', '1')");
 		$this->db->query("insert into tbl_audit_subquestion values('', '2', 'Routes are well marked', '2')");
 
-		//audit response    responseid, markerid, questionid, questiontypeid, numericresponse, textresponse
-		$this->db->query("insert into tbl_audit_response values('', 2, 1, 1, 4, '')");
-		$this->db->query("insert into tbl_audit_response values('', 2, 3, 1, 4, '')");
+		//audit response    responseid, markerid, placeid, questionid, questiontypeid, numericresponse, textresponse
+		$this->db->query("insert into tbl_audit_response values('', 2,1, 1, 1, 4, '')");
+		$this->db->query("insert into tbl_audit_response values('', 2,1, 3, 1, 4, '')");
 	}
 
 	function deleteTables(){

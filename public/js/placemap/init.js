@@ -12,22 +12,10 @@ $(document).ready(function(){
 	//Load the map stuff
 	initializeMap();
 
-	window.api.audit.add({
-		name: "Herp",
-		desc: "tests all things derpy"
-		//email: window.userEmail
-	});
 
-	audits = window.api.audit.list();
-	console.log(audits);
-	//status = api.places.add({
-	//	placename: "test",
-	//	lat: 40.36547932060214,
-	//	lng: -74.94623649215697,
-	//	zoom: 13
-	//});
-	
-	//console.log(places);
+
+	//audits = window.api.audit.list();
+
 
 	//btnDebug click event: For Debugging
 	$("#btnDebug").click(function(){	
@@ -36,8 +24,7 @@ $(document).ready(function(){
 		//console.log(markerPos)
 
 	});//end: btnDebug event click
-
-
+	
 	//btnMapReset click event: For reseting map position back to default
 	$("#btnMapReset").click(function(){	
 		

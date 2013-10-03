@@ -21,6 +21,11 @@ class Places extends CI_Controller {
 		
 	}
 
+	public function delete(){
+		$placeid = $this->input->post('placeid');
+		$this->places_model->delete($placeid);
+	}
+
 	public function listplaces(){
 		$places = $this->places_model->listplaces();
 		$places = json_encode($places);

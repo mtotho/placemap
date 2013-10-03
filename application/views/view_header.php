@@ -36,7 +36,7 @@
 	<body>
 		<div id="container">
 			<header>
-				<h1>Placemap 2</h1>
+				<h1>Placemap poo2</h1>
 				<h2>Michael Toth</h2>
 			</header>
 
@@ -44,6 +44,9 @@
 				<ul>
 					<li><a href="<?php echo site_url("home") ?>">Home</a></li>	
 					<li><a href="<?php echo site_url("map") ?>">Map</a></li>
+					<?php if($this->session->userdata('userlevel')=="admin"){ ?>
+						<li><a href="<?php echo site_url("admin") ?>">Admin</a></li>
+					<?php } ?>
 					<li><a href="<?php echo site_url("dbinit") ?>">DBINIT</a></li>
 				</ul>
 			</nav>

@@ -1,5 +1,5 @@
 function setUrlParam(param, value){
-	location.hash = "place="+param;
+	location.hash = param;
 }//end setUrlParam()
 
 function readUrlParam(param){
